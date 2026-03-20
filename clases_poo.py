@@ -46,3 +46,18 @@ for cliente in mis_clientes:
 for cliente in mis_clientes:
     print(f"cliente: {cliente.titular}, saldo final:  ${cliente.saldo}")
     
+class CuentaBancaria:
+    def __init__(self, titular, saldo_inicial):
+        self.titular = titular
+        self.saldo = saldo_inicial
+
+    def retirar(self, monto):
+        if monto > self.saldo:
+            raise ValueError("Fondos insuficientes.")
+        self.saldo -= monto
+        return f"Retiro exitoso. Saldo actual: ${self.saldo}."
+try: 
+    cuenta = CuentaBancaria("Ana", 100)
+    print(cuenta.retirar(150))  
+except ValueError as e:    
+    print(f"Error bancario: {e} ")
