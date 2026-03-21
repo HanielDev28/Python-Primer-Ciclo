@@ -1,47 +1,38 @@
-#Día 4: Las clases y objetos
 
-
-class Perro: 
-    def __init__(self, nombre, raza,):
-        self.nombre = nombre
-        self.raza = raza
-        self.edad = 0
-    def ladrar(self):
-        return "El perro " + self.nombre + "esa ladrando: ¡Guau!"
-    def cumplir_años(self, edad):
-        self. edad += 1
-        return f"!Feliz cumpleaños, {self.nombre}! Ahora tienes {self.edad} años."
-        
-Perro1 = Perro("Luca", "Labrador")
-Perro2 = Perro("Max", "Bulldog")
-print (Perro1.ladrar())
-print(Perro2.ladrar()) 
-
-print(f"Edad de {Perro1.nombre}: {Perro1.edad}")
-print(Perro1.cumplir_años())
-print(f"Edad de {Perro1.nombre} después de cumplir años: {Perro1.edad}")
-
+#Día 5: Manejo de excepciones
+#Retiro Bancario: 
 class CuentaBancaria:
-    def __init__(self, titular, saldo_inicial=0):
+    def __init__(self, titular, saldo_inicial):
         self.titular = titular
         self.saldo = saldo_inicial
-    def depositar(self, monto):
-        self.saldo += monto
-        return f"Has depositado ${monto}. Saldo actual: ${self.saldo}."
-    def retirar(self, monto):
-         if monto > self.saldo:
-            return "Fondos insuficientes."
-         else:
-            self.saldo -= monto
-            return f"Has retirado ${monto}. Saldo actual: ${self.saldo}."
 
-mis_clientes = [
-   CuentaBancaria ("Haniel", 100),
-    CuentaBancaria("Sofia", 200),
-    CuentaBancaria("Mateo", 300)
-]
-for cliente in mis_clientes:
-    print(cliente.depositar(50))
-for cliente in mis_clientes:
-    print(f"cliente: {cliente.titular}, saldo final:  ${cliente.saldo}")
-    
+    def retirar(self, monto):
+        if monto > self.saldo:
+            raise ValueError("Fondos insuficientes.")
+        self.saldo -= monto
+        return f"Retiro exitoso. Saldo actual: ${self.saldo}."
+try: 
+    cuenta = CuentaBancaria("Ana", 100)
+    print(cuenta.retirar(150))  
+except ValueError as e:    
+    print(f"Error bancario: {e} ")
+
+class banco_seguro:
+    def __init__ (self, titular, saldo_inicial):
+        self.titular = titular
+        self.saldo = saldo_inicial
+    def retirar(self, monto):
+        if monto > self.saldo:
+            raise ValueError("Fondos insuficientes para el retiro.")
+        elif monto < 0:
+            raise ValueError("El monto de retiro no puede ser negativo.")
+        
+        self.saldo -= monto
+
+        return f"Retiro exitoso. Saldo actual: ${self.saldo}."
+
+cuenta_segura = banco_seguro("Carlos", 100)
+try:
+    print(cuenta_segura.retirar(500))
+except ValueError as e:
+    print(f"Alerta del Banco: {e}")
