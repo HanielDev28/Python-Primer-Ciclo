@@ -1,0 +1,4 @@
+---- Registro de Ventas ----
+Venta realizada:
+Venta: 5x Teclado | Total: $250
+-----------------------------
